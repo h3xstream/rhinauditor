@@ -13,7 +13,7 @@
 
     <properties>
 
-        <zap.location>C:\Program Files (x86)\OWASP\Zed Attack Proxy</zap.location>
+        <zap.location>C:\Program Files\OWASP\Zed Attack Proxy</zap.location>
         <!-- Encoding configuration -->
         <project.build.sourceEncoding>iso-8859-1</project.build.sourceEncoding>
         <project.reporting.outputEncoding>iso-8859-1</project.reporting.outputEncoding>

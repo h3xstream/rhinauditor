@@ -2,6 +2,8 @@ package com.h3xstream.zap.jsscanner.engine.api;
 
 import org.mozilla.javascript.ast.Assignment;
 import org.mozilla.javascript.ast.AstNode;
+import org.mozilla.javascript.ast.StringLiteral;
+import org.mozilla.javascript.ast.InfixExpression;
 
 public abstract class BaseDetector implements Detector {
 
@@ -19,13 +21,21 @@ public abstract class BaseDetector implements Detector {
                 );
     }
 
-    protected String getLeftIdentifier(Assignment assignment) {
-        AstNode leftNode = assignment.getLeft();
-        return leftNode.toSource();
-        /*if(leftNode instanceof Name) {
-            Name leftNodeName = (Name) leftNode;
-            return leftNodeName.getIdentifier();
-        }*/
+    protected boolean isConstantString(AstNode node) {
 
+        //System.out.println("class="+node.getClass());
+        //System.out.println(node.toSource());
+
+        if(node instanceof StringLiteral) {
+            return true;
+        }
+
+        if(node instanceof InfixExpression) {
+            InfixExpression infix = (InfixExpression) node;
+
+            return isConstantString(infix.getLeft()) && isConstantString(infix.getRight());
+        }
+
+        return false;
     }
 }

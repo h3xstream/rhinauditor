@@ -11,9 +11,4 @@ public class AsyncScriptLoadDetector extends BaseDetector implements FunctionCal
     public void visitFunctionCall(FunctionCall functionCall) {
 
     }
-
-    @Override
-    public void setReporter(Reporter reporter) {
-
-    }
 }

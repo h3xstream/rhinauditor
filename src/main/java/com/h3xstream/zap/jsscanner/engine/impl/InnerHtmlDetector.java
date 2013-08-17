@@ -4,6 +4,7 @@ import com.h3xstream.zap.jsscanner.engine.api.AssignmentDetector;
 import com.h3xstream.zap.jsscanner.engine.api.BaseDetector;
 import com.h3xstream.zap.jsscanner.engine.api.Reporter;
 import org.mozilla.javascript.ast.Assignment;
+import org.mozilla.javascript.ast.AstNode;
 
 /**
  * innerHTML assignment could be the source of a DOM XSS
@@ -15,9 +16,11 @@ public class InnerHtmlDetector extends BaseDetector implements AssignmentDetecto
 
     @Override
     public void visitAssignment(Assignment assignment) {
-        String leftIdentifier = getLeftIdentifier(assignment);
 
-        if(leftIdentifier != null && leftIdentifier.endsWith(".innerHTML")) {
+        AstNode leftNode = assignment.getLeft();
+        String leftIdentifier = leftNode.toSource();
+
+        if(leftIdentifier != null && leftIdentifier.endsWith(".innerHTML") && !isConstantString(assignment.getRight())) {
             reporter.report(buildBugInstance(assignment,INNERHTML_ABBR));
         }
     }

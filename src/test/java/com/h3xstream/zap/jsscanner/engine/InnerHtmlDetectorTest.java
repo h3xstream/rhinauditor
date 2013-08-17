@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.List;
 
-import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.*;
 
 public class InnerHtmlDetectorTest extends ScannerBaseTestCase {
 
@@ -17,6 +17,12 @@ public class InnerHtmlDetectorTest extends ScannerBaseTestCase {
         PrinterReporter reporter = spy(new PrinterReporter());
 
         scanScript("/scripts/test/dom_xss_innerhtml.js", reporter);
+
+
+        verify(reporter).report(bug("INNERHTML", 4));
+        verify(reporter).report(bug("INNERHTML", 10));
+
+        verify(reporter,times(2)).report(bug("INNERHTML"));
     }
 
     @Test
@@ -24,5 +30,8 @@ public class InnerHtmlDetectorTest extends ScannerBaseTestCase {
         PrinterReporter reporter = spy(new PrinterReporter());
 
         scanScript("/scripts/test/dom_xss_innerhtml_false_positive.js", reporter);
+
+
+        verify(reporter,never()).report(bug("INNERHTML"));
     }
 }
