@@ -11,7 +11,7 @@ public class CollectorReporter  implements Reporter {
     private List<BugInstance> bugs = new ArrayList<BugInstance>();
 
     public void report(BugInstance bugInstance) {
-
+        bugs.add(bugInstance);
     }
 
     public List<BugInstance> getBugs() {

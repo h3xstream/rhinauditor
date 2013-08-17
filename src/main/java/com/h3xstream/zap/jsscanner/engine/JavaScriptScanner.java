@@ -4,10 +4,13 @@ import com.h3xstream.zap.jsscanner.engine.api.*;
 import org.mozilla.javascript.*;
 import org.mozilla.javascript.ast.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,17 +45,33 @@ public class JavaScriptScanner {
         this.reporter = reporter;
     }
 
+    public void scan(String script,String filename) {
+        InputStream in = new ByteArrayInputStream(script.getBytes());
+        try {
+            scan(in,filename);
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void scan(InputStream inputStream,String filename) throws IOException {
 
         for(Detector d : allDetectors) {
             d.setReporter(reporter);
         }
 
+
         //Configuration to include comments in the parsing
         CompilerEnvirons env = new CompilerEnvirons();
-        env.setRecordingLocalJsDocComments(true);
-        env.setAllowSharpComments(true);
-        env.setRecordingComments(true);
+        URLClassLoader cl = (URLClassLoader) (CompilerEnvirons.class.getClassLoader());
+        for(URL u : cl.getURLs()) {
+            System.out.println(u.toString());
+        }
+
+        //env.setRecordingLocalJsDocComments(true);
+        //env.setAllowSharpComments(true);
+        //env.setRecordingComments(true);
 
         InputStreamReader reader = new InputStreamReader(inputStream);
         try {

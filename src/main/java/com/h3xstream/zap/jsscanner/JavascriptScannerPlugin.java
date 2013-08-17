@@ -1,9 +1,12 @@
 package com.h3xstream.zap.jsscanner;
 
-import com.h3xstream.zap.jsscanner.BugConverter;
 import com.h3xstream.zap.jsscanner.engine.CollectorReporter;
 import com.h3xstream.zap.jsscanner.engine.JavaScriptScanner;
 import com.h3xstream.zap.jsscanner.engine.api.BugInstance;
+import com.h3xstream.zap.jsscanner.engine.api.Detector;
+import com.h3xstream.zap.jsscanner.engine.impl.DocumentWriteDetector;
+import com.h3xstream.zap.jsscanner.engine.impl.EvalDetector;
+import com.h3xstream.zap.jsscanner.engine.impl.InnerHtmlDetector;
 import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.Source;
 import org.apache.log4j.Logger;
@@ -23,8 +26,9 @@ public class JavascriptScannerPlugin extends PluginPassiveScanner {
 
     private Logger logger = Logger.getLogger(JavascriptScannerPlugin.class);
 
-    @Override
+    private static Detector[] DETECTORS = {new InnerHtmlDetector(),new EvalDetector(),new DocumentWriteDetector()};
 
+    @Override
     public void scanHttpRequestSend(HttpMessage httpMessage, int id) {
 
     }
@@ -37,6 +41,8 @@ public class JavascriptScannerPlugin extends PluginPassiveScanner {
             logger.info("JAVASCRIPT START");
             String scriptFile = httpMessage.getResponseBody().toString();
             logger.info("File Script found:"+scriptFile.substring(0,Math.min(10,scriptFile.length())));
+
+            scanJavaScript(scriptFile, refId, httpMessage);
             logger.info("JAVASCRIPT END");
         }
         else if(h.isHtml()) {
@@ -45,18 +51,28 @@ public class JavascriptScannerPlugin extends PluginPassiveScanner {
             for (Element e : listScript) {
                 String inlineScript = e.getContent().toString();
                 logger.info("Inline Script found:"+ inlineScript.substring(0,Math.min(10,inlineScript.length())));
+
+                scanJavaScript(inlineScript, refId, httpMessage);
             }
             logger.info("HTML END");
         }
     }
 
-    private void scanJavaScript(String script,int refId) {
+    private void scanJavaScript(String script,int refId,HttpMessage httpMessage) {
         JavaScriptScanner scanner = new JavaScriptScanner();
+
+        for(Detector d : DETECTORS) {
+            scanner.addDetector(d);
+        }
+
         CollectorReporter reporter = new CollectorReporter();
         scanner.setReporter(reporter);
 
+        String uri = httpMessage.getRequestHeader().getURI().toString();
+        scanner.scan(script,uri);
+
         for(BugInstance bug : reporter.getBugs()) {
-            Alert newAlert = BugConverter.convertBugToAlert(PLUGIN_ID,bug);
+            Alert newAlert = BugConverter.convertBugToAlert(PLUGIN_ID,bug,httpMessage);
             this.parent.raiseAlert(refId, newAlert);
         }
     }
@@ -68,6 +84,6 @@ public class JavascriptScannerPlugin extends PluginPassiveScanner {
 
     @Override
     public String getName() {
-        return null;
+        return "JavaScript Scanner";
     }
 }
