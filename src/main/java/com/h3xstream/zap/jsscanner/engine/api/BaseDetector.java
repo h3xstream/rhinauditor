@@ -1,9 +1,6 @@
 package com.h3xstream.zap.jsscanner.engine.api;
 
-import org.mozilla.javascript.ast.Assignment;
-import org.mozilla.javascript.ast.AstNode;
-import org.mozilla.javascript.ast.StringLiteral;
-import org.mozilla.javascript.ast.InfixExpression;
+import org.mozilla.javascript.ast.*;
 
 public abstract class BaseDetector implements Detector {
 
@@ -30,10 +27,14 @@ public abstract class BaseDetector implements Detector {
             return true;
         }
 
-        if(node instanceof InfixExpression) {
+        else if(node instanceof InfixExpression) {
             InfixExpression infix = (InfixExpression) node;
-
             return isConstantString(infix.getLeft()) && isConstantString(infix.getRight());
+        }
+
+        else if(node instanceof ParenthesizedExpression) {
+            ParenthesizedExpression par = (ParenthesizedExpression) node;
+            return isConstantString(par.getExpression());
         }
 
         return false;

@@ -10,7 +10,7 @@
     </extensions>
     <ascanrules/>
     <pscanrules>
-        <pscanrule>com.h3xsream.zap.jsscanner.JavascriptScannerPlugin</pscanrule>
+        <pscanrule>com.h3xstream.zap.jsscanner.JavascriptScannerPlugin</pscanrule>
     </pscanrules>
     <filters/>
     <files/>

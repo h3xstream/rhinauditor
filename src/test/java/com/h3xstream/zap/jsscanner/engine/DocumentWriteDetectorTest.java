@@ -15,7 +15,6 @@ public class DocumentWriteDetectorTest extends ScannerBaseTestCase {
 
         scanScript("/scripts/test/document_write.js", reporter);
 
-
         verify(reporter).report(bug("DOCWRITE", 3));
         verify(reporter,times(1)).report(bug("DOCWRITE"));
     }
@@ -26,8 +25,6 @@ public class DocumentWriteDetectorTest extends ScannerBaseTestCase {
 
         scanScript("/scripts/test/document_write_false_positive.js", reporter);
 
-
         verify(reporter,never()).report(bug("DOCWRITE"));
-
     }
 }
