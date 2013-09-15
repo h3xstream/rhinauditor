@@ -3,24 +3,28 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.h3xstream.zap</groupId>
-    <artifactId>jsscanner-plugin</artifactId>
+    <groupId>com.h3xstream.rhinauditor</groupId>
+    <artifactId>rhinauditor-root-pom</artifactId>
 
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <name>JavaScript Scanner (ZAProxy plugin)</name>
+    <name>Rhinauditor (root pom.xml)</name>
+
+    <modules>
+        <module>rhinauditor-core</module>
+        <module>rhinauditor-zap-plugin</module>
+        <module>rhinauditor-burp-plugin</module>
+        <module>burp-api</module>
+    </modules>
 
     <properties>
-
-        <zap.location>C:\Program Files\OWASP\Zed Attack Proxy</zap.location>
         <!-- Encoding configuration -->
-        <project.build.sourceEncoding>iso-8859-1</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>iso-8859-1</project.reporting.outputEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <build>
-        <finalName>jsscanner-release-1</finalName>
 
         <plugins>
             <!-- Force the use of Java 6 compiler -->
@@ -36,77 +40,96 @@
         </plugins>
     </build>
 
-    <dependencies>
 
-        <dependency>
-            <groupId>org.mozilla</groupId>
-            <artifactId>rhino</artifactId>
-            <version>1.7R4</version>
-        </dependency>
+    <dependencyManagement>
+        <dependencies>
 
-        <dependency>
-            <groupId>net.htmlparser.jericho</groupId>
-            <artifactId>jericho-html</artifactId>
-            <version>3.1</version>
-            <scope>provided</scope>
-        </dependency>
+            <!-- Sub modules versions -->
+
+            <dependency>
+                <groupId>com.h3xstream.rhinauditor</groupId>
+                <artifactId>rhinauditor-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.h3xstream.rhinauditor</groupId>
+                <artifactId>burp-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
 
-        <!-- ZAProxy -->
-        <dependency>
-            <groupId>org.zaproxy</groupId>
-            <artifactId>zaproxy</artifactId>
-            <version>2.1.0</version>
-            <scope>system</scope>
-            <systemPath>${zap.location}\zap.jar</systemPath> <!-- ZAP doesn't release its api on maven -->
-        </dependency>
+            <!-- Rhino  use for its JS Parser -->
 
-        <!-- Log4J -->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-            <scope>provided</scope>
-        </dependency>
+            <dependency>
+                <groupId>org.mozilla</groupId>
+                <artifactId>rhino</artifactId>
+                <version>1.7R4</version>
+                <scope>provided</scope>
+            </dependency>
 
-        <!-- Paros HttpMessage expose HttpClient objects-->
-        <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
-            <scope>provided</scope>
-        </dependency>
+            <!-- ZAProxy -->
 
-        <!-- Test dependencies -->
+            <dependency>
+                <groupId>org.zaproxy</groupId>
+                <artifactId>zaproxy</artifactId>
+                <version>2.1.0</version>
+                <scope>provided</scope>
+            </dependency>
 
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>1.9.0</version>
-            <scope>test</scope>
-        </dependency>
+            <dependency>
+                <groupId>net.htmlparser.jericho</groupId>
+                <artifactId>jericho-html</artifactId>
+                <version>3.1</version>
+                <scope>provided</scope>
+            </dependency>
 
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
-            <version>1.2.1</version>
-            <scope>test</scope>
-        </dependency>
+            <!-- Log4J -->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.17</version>
+                <scope>provided</scope>
+            </dependency>
 
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>5.14.9</version>
-            <scope>test</scope>
-        </dependency>
+            <!-- Paros HttpMessage expose HttpClient objects-->
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>3.1</version>
+                <scope>provided</scope>
+            </dependency>
 
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.4</version>
-            <scope>test</scope>
-        </dependency>
+            <!-- Test dependencies -->
 
-    </dependencies>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>1.9.0</version>
+                <scope>test</scope>
+            </dependency>
 
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-core</artifactId>
+                <version>1.2.1</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>5.14.9</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.4</version>
+                <scope>test</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 </project>
