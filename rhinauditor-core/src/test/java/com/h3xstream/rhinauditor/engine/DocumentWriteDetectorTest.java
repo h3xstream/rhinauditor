@@ -1,6 +1,5 @@
 package com.h3xstream.rhinauditor.engine;
 
-import com.h3xstream.rhinauditor.engine.PrinterReporter;
 import com.h3xstream.rhinauditor.engine.util.ScannerBaseTestCase;
 import org.testng.annotations.Test;
 

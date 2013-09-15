@@ -1,6 +1,5 @@
 package com.h3xstream.rhinauditor.engine;
 
-import com.h3xstream.rhinauditor.engine.PrinterReporter;
 import com.h3xstream.rhinauditor.engine.util.ScannerBaseTestCase;
 import org.testng.annotations.Test;
 
@@ -8,6 +7,7 @@ import java.io.IOException;
 
 import static org.mockito.Mockito.spy;
 
+@Test(enabled = false)
 public class RealWorldTest extends ScannerBaseTestCase {
 
     @Test

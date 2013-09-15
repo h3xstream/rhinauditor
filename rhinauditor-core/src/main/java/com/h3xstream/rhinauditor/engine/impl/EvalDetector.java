@@ -22,8 +22,12 @@ public class EvalDetector  extends BaseDetector implements FunctionCallDetector 
             reporter.report(buildBugInstance(functionCall,EVAL_ABBR));
         }
 
-        if("settimeout".equals(source) && args.size() == 1 && !isConstantString(args.get(0))) {
-            reporter.report(buildBugInstance(functionCall,SETTIMEOUT_ABBR));
+        if("setTimeout".equals(source) &&args.size() >1){
+            AstNode firstParam = args.get(0);
+            if(!isConstantString(firstParam) && !isFunction(firstParam)) {
+                reporter.report(buildBugInstance(functionCall,SETTIMEOUT_ABBR));
+            }
         }
     }
+
 }

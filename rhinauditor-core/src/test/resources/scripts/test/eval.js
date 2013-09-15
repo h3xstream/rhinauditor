@@ -1,6 +1,6 @@
 
 function callMe(input) {
-
+    console.info(input);
 }
 
 eval("callMe('ok')");

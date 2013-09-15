@@ -39,4 +39,8 @@ public abstract class BaseDetector implements Detector {
 
         return false;
     }
+
+    protected boolean isFunction(AstNode firstParam) {
+        return firstParam instanceof FunctionNode;
+    }
 }

@@ -36,8 +36,8 @@ public class JavascriptScannerPlugin extends PluginPassiveScanner {
     @Override
     public void scanHttpResponseReceive(HttpMessage httpMessage, int refId, Source source) {
         HttpResponseHeader h =  httpMessage.getResponseHeader();
-
-        if(h.isJavaScript()) {
+        String url = httpMessage.getRequestHeader().getURI().toString();
+        if(h.isJavaScript() || url.endsWith(".js")) {
             logger.info("JAVASCRIPT START");
             String scriptFile = httpMessage.getResponseBody().toString();
             logger.info("File Script found:"+scriptFile.substring(0,Math.min(10,scriptFile.length())));

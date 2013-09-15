@@ -91,13 +91,7 @@ public class JavaScriptScanner {
         public boolean visit(AstNode node) {
             try {
                 visitNode(node);
-            } catch (IllegalAccessException e) {
-                //FIXME: Log or stop ?
-            } catch (InstantiationException e) {
-                //FIXME: Log or stop ?
-            } catch (NoSuchMethodException e) {
-                //FIXME: Log or stop ?
-            } catch (InvocationTargetException e) {
+            } catch (ReflectiveOperationException e) {
                 //FIXME: Log or stop ?
             }
 
