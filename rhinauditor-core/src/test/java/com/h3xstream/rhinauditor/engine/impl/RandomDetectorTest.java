@@ -1,4 +1,4 @@
-package com.h3xstream.rhinauditor.engine;
+package com.h3xstream.rhinauditor.engine.impl;
 
 import com.h3xstream.rhinauditor.engine.util.ScannerBaseTestCase;
 

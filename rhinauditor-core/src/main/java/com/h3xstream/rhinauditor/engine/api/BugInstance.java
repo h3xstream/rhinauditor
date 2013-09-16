@@ -24,4 +24,9 @@ public class BugInstance {
         return abbrev;
     }
 
+    @Override
+    public String toString() {
+        return ""+file+ ":" + line+" => "+abbrev;
+    }
+
 }

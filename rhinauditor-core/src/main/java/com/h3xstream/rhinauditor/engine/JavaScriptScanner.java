@@ -64,14 +64,10 @@ public class JavaScriptScanner {
 
         //Configuration to include comments in the parsing
         CompilerEnvirons env = new CompilerEnvirons();
-        URLClassLoader cl = (URLClassLoader) (CompilerEnvirons.class.getClassLoader());
-        for(URL u : cl.getURLs()) {
-            System.out.println(u.toString());
-        }
 
-        //env.setRecordingLocalJsDocComments(true);
-        //env.setAllowSharpComments(true);
-        //env.setRecordingComments(true);
+        env.setRecordingLocalJsDocComments(true);
+        env.setAllowSharpComments(true);
+        env.setRecordingComments(true);
 
         InputStreamReader reader = new InputStreamReader(inputStream);
         try {
@@ -127,14 +123,6 @@ public class JavaScriptScanner {
                     AssignmentDetector detector = (AssignmentDetector) d;
                     detector.visitAssignment(assignment);
                 }
-
-                /*
-                AstNode leftNode = assignment.getLeft();
-                if(leftNode instanceof Name) {
-                    Name leftNodeName = (Name) leftNode;
-                    System.out.println(leftNodeName.getIdentifier());
-                }
-                */
             }
 
         }

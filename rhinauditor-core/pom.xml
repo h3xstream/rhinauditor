@@ -14,6 +14,9 @@
 
     <packaging>jar</packaging>
 
+    <description>
+        This project contains the rules that identify code signatures.
+    </description>
 
     <dependencies>
 
