@@ -87,7 +87,7 @@ public class JavaScriptScanner {
         public boolean visit(AstNode node) {
             try {
                 visitNode(node);
-            } catch (ReflectiveOperationException e) {
+            } catch (Exception e) {
                 //FIXME: Log or stop ?
             }
 
