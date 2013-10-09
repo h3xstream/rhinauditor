@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +21,7 @@ public class JavaScriptScanner {
 
     private List<Detector> allDetectors = new ArrayList<Detector>();
 
-    private Reporter reporter = new PrinterReporter();
+    private BugReporter bugReporter = new PrinterBugReporter();
 
     public void addDetector(Detector detector) {
         allDetectors.add(detector);
@@ -41,8 +39,8 @@ public class JavaScriptScanner {
         }
     }
 
-    public void setReporter(Reporter reporter) {
-        this.reporter = reporter;
+    public void setBugReporter(BugReporter bugReporter) {
+        this.bugReporter = bugReporter;
     }
 
     public void scan(String script,String filename) {
@@ -58,7 +56,7 @@ public class JavaScriptScanner {
     public void scan(InputStream inputStream,String filename) throws IOException {
 
         for(Detector d : allDetectors) {
-            d.setReporter(reporter);
+            d.setBugReporter(bugReporter);
         }
 
 

@@ -1,2 +1,2 @@
 @ECHO OFF
-java -jar rhinauditor-cli.jar
+java -jar rhinauditor-cli.jar %*

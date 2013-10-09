@@ -5,5 +5,5 @@ package com.h3xstream.rhinauditor.engine.api;
  */
 public interface Detector {
 
-    void setReporter(Reporter reporter);
+    void setBugReporter(BugReporter bugReporter);
 }

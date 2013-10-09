@@ -1,9 +1,11 @@
 package com.h3xstream.rhinauditor.engine;
 
 import com.h3xstream.rhinauditor.engine.api.BugInstance;
-import com.h3xstream.rhinauditor.engine.api.Reporter;
+import com.h3xstream.rhinauditor.engine.api.BugReporter;
 
-public class PrinterReporter implements Reporter {
+public class PrinterBugReporter implements BugReporter {
+
+
 
     public void report(BugInstance bugInstance) {
 
@@ -13,4 +15,5 @@ public class PrinterReporter implements Reporter {
                 bugInstance.getAbbrev());
 
     }
+
 }

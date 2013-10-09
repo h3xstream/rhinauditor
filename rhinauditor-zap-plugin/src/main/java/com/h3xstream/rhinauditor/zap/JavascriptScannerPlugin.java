@@ -1,6 +1,6 @@
 package com.h3xstream.rhinauditor.zap;
 
-import com.h3xstream.rhinauditor.engine.CollectorReporter;
+import com.h3xstream.rhinauditor.engine.CollectorBugReporter;
 import com.h3xstream.rhinauditor.engine.JavaScriptScanner;
 import com.h3xstream.rhinauditor.engine.api.BugInstance;
 import com.h3xstream.rhinauditor.engine.api.Detector;
@@ -65,8 +65,8 @@ public class JavascriptScannerPlugin extends PluginPassiveScanner {
             scanner.addDetector(d);
         }
 
-        CollectorReporter reporter = new CollectorReporter();
-        scanner.setReporter(reporter);
+        CollectorBugReporter reporter = new CollectorBugReporter();
+        scanner.setBugReporter(reporter);
 
         String uri = httpMessage.getRequestHeader().getURI().toString();
         scanner.scan(script,uri);

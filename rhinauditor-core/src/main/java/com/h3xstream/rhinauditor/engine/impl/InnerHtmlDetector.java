@@ -20,7 +20,7 @@ public class InnerHtmlDetector extends BaseDetector implements AssignmentDetecto
         String leftIdentifier = leftNode.toSource();
 
         if(leftIdentifier != null && leftIdentifier.endsWith(".innerHTML") && !isConstantString(assignment.getRight())) {
-            reporter.report(buildBugInstance(assignment,INNERHTML_ABBR));
+            bugReporter.report(buildBugInstance(assignment,INNERHTML_ABBR));
         }
     }
 }

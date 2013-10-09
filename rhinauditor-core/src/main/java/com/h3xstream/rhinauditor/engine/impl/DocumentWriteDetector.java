@@ -18,7 +18,7 @@ public class DocumentWriteDetector extends BaseDetector implements FunctionCallD
         List<AstNode> args = functionCall.getArguments();
 
         if(source.endsWith(".write") && args.size() == 1 && !isConstantString(args.get(0))) {
-            reporter.report(buildBugInstance(functionCall,DOCUMENT_WRITE_ABBR));
+            bugReporter.report(buildBugInstance(functionCall,DOCUMENT_WRITE_ABBR));
         }
     }
 

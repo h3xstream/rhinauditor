@@ -2,7 +2,7 @@ package com.h3xstream.rhinauditor.engine.util;
 
 import com.h3xstream.rhinauditor.engine.JavaScriptScanner;
 import com.h3xstream.rhinauditor.engine.api.BugInstance;
-import com.h3xstream.rhinauditor.engine.api.Reporter;
+import com.h3xstream.rhinauditor.engine.api.BugReporter;
 import com.h3xstream.rhinauditor.engine.impl.DocumentWriteDetector;
 import com.h3xstream.rhinauditor.engine.impl.EvalDetector;
 import com.h3xstream.rhinauditor.engine.impl.InnerHtmlDetector;
@@ -14,7 +14,7 @@ import java.io.InputStream;
 
 public abstract class ScannerBaseTestCase {
 
-    public void scanScript(String path,Reporter reporter) throws IOException {
+    public void scanScript(String path,BugReporter bugReporter) throws IOException {
         InputStream in = getClass().getResourceAsStream(path);
 
         JavaScriptScanner scanner = new JavaScriptScanner();
@@ -22,7 +22,7 @@ public abstract class ScannerBaseTestCase {
         scanner.addDetector(new DocumentWriteDetector());
         scanner.addDetector(new EvalDetector());
 
-        scanner.setReporter(reporter);
+        scanner.setBugReporter(bugReporter);
 
         scanner.scan(in, FilenameUtils.getName(path));
     }

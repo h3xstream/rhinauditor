@@ -18,8 +18,8 @@ public class ApiTest {
         //Configure the scanner
         JavaScriptScanner scanner = new JavaScriptScanner();
         scanner.addDetector(new EvalDetector());
-        CollectorReporter collector = new CollectorReporter();
-        scanner.setReporter(collector);
+        CollectorBugReporter collector = new CollectorBugReporter();
+        scanner.setBugReporter(collector);
 
         //Ingest some script
         String script = "var test='someCall('+document.search+')';\n\neval(test);";

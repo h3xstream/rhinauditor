@@ -14,8 +14,8 @@ public class RealWorldTest extends ScannerBaseTestCase {
 //    public void scanMega() throws IOException {
 //        System.setProperty("file.encodin","UTF-8");
 //
-//        PrinterReporter reporter = spy(new PrinterReporter());
+//        PrinterBugReporter bugReporter = spy(new PrinterBugReporter());
 //
-//        scanScript("/scripts/realworld/mega_secureboot.js", reporter);
+//        scanScript("/scripts/realworld/mega_secureboot.js", bugReporter);
 //    }
 }

@@ -4,17 +4,18 @@ import org.mozilla.javascript.ast.*;
 
 public abstract class BaseDetector implements Detector {
 
-    protected Reporter reporter;
+    protected BugReporter bugReporter;
 
-    public void setReporter(Reporter reporter) {
-        this.reporter = reporter;
+    public void setBugReporter(BugReporter bugReporter) {
+        this.bugReporter = bugReporter;
     }
 
     protected BugInstance buildBugInstance(AstNode node, String abbrev) {
         return new BugInstance(
                 node.getAstRoot().getTop().getSourceName(),
                 node.getLineno(),
-                abbrev
+                abbrev,
+                node.toSource()
                 );
     }
 

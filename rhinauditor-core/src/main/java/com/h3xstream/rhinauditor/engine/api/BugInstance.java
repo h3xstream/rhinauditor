@@ -5,11 +5,14 @@ public class BugInstance {
     private final String file;
     private final int line;
     private final String abbrev;
+    private final String code;
 
-    public BugInstance(String file, int line, String abbrev) {
+
+    public BugInstance(String file, int line, String abbrev, String code) {
         this.file = file;
         this.line = line;
         this.abbrev = abbrev;
+        this.code = code;
     }
 
     public String getFile() {
@@ -23,6 +26,11 @@ public class BugInstance {
     public String getAbbrev() {
         return abbrev;
     }
+
+    public String getCode() {
+        return code;
+    }
+
 
     @Override
     public String toString() {

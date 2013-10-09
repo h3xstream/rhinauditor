@@ -1,6 +1,6 @@
 package com.h3xstream.rhinauditor.engine.impl;
 
-import com.h3xstream.rhinauditor.engine.PrinterReporter;
+import com.h3xstream.rhinauditor.engine.PrinterBugReporter;
 import com.h3xstream.rhinauditor.engine.util.ScannerBaseTestCase;
 import org.testng.annotations.Test;
 
@@ -12,7 +12,7 @@ public class EvalDetectorTest extends ScannerBaseTestCase {
 
     @Test
     public void evalPositiveSamples() throws IOException {
-        PrinterReporter reporter = spy(new PrinterReporter());
+        PrinterBugReporter reporter = spy(new PrinterBugReporter());
 
         scanScript("/scripts/test/eval.js", reporter);
 
@@ -22,7 +22,7 @@ public class EvalDetectorTest extends ScannerBaseTestCase {
 
     @Test
     public void evalFalsePositiveSamples() throws IOException {
-        PrinterReporter reporter = spy(new PrinterReporter());
+        PrinterBugReporter reporter = spy(new PrinterBugReporter());
 
         scanScript("/scripts/test/eval_false_positive.js", reporter);
 
@@ -33,7 +33,7 @@ public class EvalDetectorTest extends ScannerBaseTestCase {
 
     @Test
     public void setTimeOutSample() throws IOException {
-        PrinterReporter reporter = spy(new PrinterReporter());
+        PrinterBugReporter reporter = spy(new PrinterBugReporter());
 
         scanScript("/scripts/test/setTimeout.js", reporter);
 
@@ -44,7 +44,7 @@ public class EvalDetectorTest extends ScannerBaseTestCase {
 
     @Test
     public void setTimeOutSampleFalsePositive() throws IOException {
-        PrinterReporter reporter = spy(new PrinterReporter());
+        PrinterBugReporter reporter = spy(new PrinterBugReporter());
 
         scanScript("/scripts/test/setTimeout_false_positive.js", reporter);
 

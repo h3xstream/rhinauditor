@@ -1,6 +1,6 @@
 package com.h3xstream.rhinauditor.engine.impl;
 
-import com.h3xstream.rhinauditor.engine.PrinterReporter;
+import com.h3xstream.rhinauditor.engine.PrinterBugReporter;
 import com.h3xstream.rhinauditor.engine.util.ScannerBaseTestCase;
 import org.testng.annotations.Test;
 
@@ -12,7 +12,7 @@ public class DocumentWriteDetectorTest extends ScannerBaseTestCase {
 
     @Test
     public void scanPositiveSamples() throws IOException {
-        PrinterReporter reporter = spy(new PrinterReporter());
+        PrinterBugReporter reporter = spy(new PrinterBugReporter());
 
         scanScript("/scripts/test/document_write.js", reporter);
 
@@ -22,7 +22,7 @@ public class DocumentWriteDetectorTest extends ScannerBaseTestCase {
 
     @Test
     public void scanFalsePositiveSamples() throws IOException {
-        PrinterReporter reporter = spy(new PrinterReporter());
+        PrinterBugReporter reporter = spy(new PrinterBugReporter());
 
         scanScript("/scripts/test/document_write_false_positive.js", reporter);
 
