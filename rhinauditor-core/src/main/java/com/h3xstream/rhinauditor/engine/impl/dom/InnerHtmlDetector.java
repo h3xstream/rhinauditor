@@ -1,4 +1,4 @@
-package com.h3xstream.rhinauditor.engine.impl;
+package com.h3xstream.rhinauditor.engine.impl.dom;
 
 import com.h3xstream.rhinauditor.engine.api.AssignmentDetector;
 import com.h3xstream.rhinauditor.engine.api.BaseDetector;
@@ -10,7 +10,7 @@ import org.mozilla.javascript.ast.AstNode;
  */
 public class InnerHtmlDetector extends BaseDetector implements AssignmentDetector {
 
-    private static final String INNERHTML_ABBR = "INNERHTML";
+    private static final String INNER_HTML_ABBR = "INNER_HTML";
 
 
     @Override
@@ -20,7 +20,7 @@ public class InnerHtmlDetector extends BaseDetector implements AssignmentDetecto
         String leftIdentifier = leftNode.toSource();
 
         if(leftIdentifier != null && leftIdentifier.endsWith(".innerHTML") && !isConstantString(assignment.getRight())) {
-            bugReporter.report(buildBugInstance(assignment,INNERHTML_ABBR));
+            bugReporter.report(buildBugInstance(assignment,INNER_HTML_ABBR));
         }
     }
 }

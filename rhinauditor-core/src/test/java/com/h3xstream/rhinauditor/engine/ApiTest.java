@@ -1,7 +1,7 @@
 package com.h3xstream.rhinauditor.engine;
 
 import com.h3xstream.rhinauditor.engine.api.BugInstance;
-import com.h3xstream.rhinauditor.engine.impl.EvalDetector;
+import com.h3xstream.rhinauditor.engine.impl.injection.EvalDetector;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;

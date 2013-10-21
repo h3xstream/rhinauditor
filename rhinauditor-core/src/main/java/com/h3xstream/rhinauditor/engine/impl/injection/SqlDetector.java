@@ -1,4 +1,4 @@
-package com.h3xstream.rhinauditor.engine.impl;
+package com.h3xstream.rhinauditor.engine.impl.injection;
 
 import com.h3xstream.rhinauditor.engine.api.BaseDetector;
 import com.h3xstream.rhinauditor.engine.api.FunctionCallDetector;

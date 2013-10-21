@@ -1,4 +1,4 @@
-package com.h3xstream.rhinauditor.engine.impl;
+package com.h3xstream.rhinauditor.engine.impl.injection;
 
 import com.h3xstream.rhinauditor.engine.api.BaseDetector;
 import com.h3xstream.rhinauditor.engine.api.FunctionCallDetector;
@@ -7,9 +7,9 @@ import org.mozilla.javascript.ast.FunctionCall;
 
 import java.util.List;
 
-public class DocumentWriteDetector extends BaseDetector implements FunctionCallDetector {
+public class EvalDetector extends BaseDetector implements FunctionCallDetector {
 
-    private static final String DOCUMENT_WRITE_ABBR = "DOCWRITE";
+    private static final String EVAL_ABBR = "EVAL";
 
     @Override
     public void visitFunctionCall(FunctionCall functionCall) {
@@ -17,8 +17,8 @@ public class DocumentWriteDetector extends BaseDetector implements FunctionCallD
 
         List<AstNode> args = functionCall.getArguments();
 
-        if(source.endsWith(".write") && args.size() == 1 && !isConstantString(args.get(0))) {
-            bugReporter.report(buildBugInstance(functionCall,DOCUMENT_WRITE_ABBR));
+        if("eval".equals(source) && args.size() == 1 && !isConstantString(args.get(0))) {
+            bugReporter.report(buildBugInstance(functionCall,EVAL_ABBR));
         }
     }
 

@@ -1,11 +1,10 @@
 package com.h3xstream.rhinauditor.engine.util;
 
+import com.h3xstream.rhinauditor.engine.DetectorConstants;
 import com.h3xstream.rhinauditor.engine.JavaScriptScanner;
 import com.h3xstream.rhinauditor.engine.api.BugInstance;
 import com.h3xstream.rhinauditor.engine.api.BugReporter;
-import com.h3xstream.rhinauditor.engine.impl.DocumentWriteDetector;
-import com.h3xstream.rhinauditor.engine.impl.EvalDetector;
-import com.h3xstream.rhinauditor.engine.impl.InnerHtmlDetector;
+import com.h3xstream.rhinauditor.engine.api.Detector;
 import org.apache.commons.io.FilenameUtils;
 import org.mockito.Matchers;
 
@@ -18,10 +17,10 @@ public abstract class ScannerBaseTestCase {
         InputStream in = getClass().getResourceAsStream(path);
 
         JavaScriptScanner scanner = new JavaScriptScanner();
-        scanner.addDetector(new InnerHtmlDetector());
-        scanner.addDetector(new DocumentWriteDetector());
-        scanner.addDetector(new EvalDetector());
 
+        for(Detector d : DetectorConstants.DEFAULT_DETECTORS_LIST) {
+            scanner.addDetector(d);
+        }
         scanner.setBugReporter(bugReporter);
 
         scanner.scan(in, FilenameUtils.getName(path));

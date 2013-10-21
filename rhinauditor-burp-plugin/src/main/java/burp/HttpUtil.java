@@ -15,7 +15,7 @@ public class HttpUtil {
 
     /**
      * Extract the path from the first header.
-     * <p/>
+     *
      * Input expected :
      * - GET /index.html HTTP/1.1
      * - POST /index.html HTTP/1.1

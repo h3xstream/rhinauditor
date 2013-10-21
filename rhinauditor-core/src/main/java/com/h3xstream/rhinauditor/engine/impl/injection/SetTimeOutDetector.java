@@ -1,4 +1,4 @@
-package com.h3xstream.rhinauditor.engine.impl;
+package com.h3xstream.rhinauditor.engine.impl.injection;
 
 import com.h3xstream.rhinauditor.engine.api.BaseDetector;
 import com.h3xstream.rhinauditor.engine.api.FunctionCallDetector;
@@ -7,10 +7,9 @@ import org.mozilla.javascript.ast.FunctionCall;
 
 import java.util.List;
 
-public class EvalDetector  extends BaseDetector implements FunctionCallDetector {
+public class SetTimeOutDetector extends BaseDetector implements FunctionCallDetector {
 
-    private static final String EVAL_ABBR = "EVAL";
-    private static final String SETTIMEOUT_ABBR = "SETTIMEOUT";
+    private static final String SET_TIMEOUT_ABBR = "SET_TIMEOUT";
 
     @Override
     public void visitFunctionCall(FunctionCall functionCall) {
@@ -18,16 +17,11 @@ public class EvalDetector  extends BaseDetector implements FunctionCallDetector 
 
         List<AstNode> args = functionCall.getArguments();
 
-        if("eval".equals(source) && args.size() == 1 && !isConstantString(args.get(0))) {
-            bugReporter.report(buildBugInstance(functionCall,EVAL_ABBR));
-        }
-
-        if("setTimeout".equals(source) &&args.size() >1){
+        if("setTimeout".equals(source) && args.size() >1){
             AstNode firstParam = args.get(0);
             if(!isConstantString(firstParam) && !isFunction(firstParam)) {
-                bugReporter.report(buildBugInstance(functionCall,SETTIMEOUT_ABBR));
+                bugReporter.report(buildBugInstance(functionCall, SET_TIMEOUT_ABBR));
             }
         }
     }
-
 }
