@@ -16,10 +16,51 @@
 
     <packaging>jar</packaging>
 
+    <build>
+        <plugins>
+            <!-- Create the final package which include the engine (rhinauditor-core) -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <id>jar-with-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <finalName>rhinauditor-burp-plugin</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <archive>
+                                <addMavenDescriptor>false</addMavenDescriptor>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
     <dependencies>
+
+        <dependency>
+            <groupId>com.h3xstream.rhinauditor</groupId>
+            <artifactId>rhinauditor-core</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.h3xstream.rhinauditor</groupId>
             <artifactId>burp-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mozilla</groupId>
+            <artifactId>rhino</artifactId>
         </dependency>
     </dependencies>
 </project>

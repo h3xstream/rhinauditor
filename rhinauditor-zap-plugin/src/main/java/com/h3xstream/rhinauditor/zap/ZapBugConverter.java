@@ -8,11 +8,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class BugConverter {
+/**
+ * This utility class convert the @code{BugInstance} generate by the core engine to @code{Alert}.
+ * 
+ */
+public class ZapBugConverter {
     static Properties props = new Properties();
 
     static {
-        InputStream in = BugConverter.class.getResourceAsStream("/locale_rhinauditor_plugin/messages.properties");
+        InputStream in = ZapBugConverter.class.getResourceAsStream("/locale_rhinauditor_plugin/messages.properties");
         try {
             props.load(in);
         } catch (IOException e) {
@@ -34,9 +38,9 @@ public class BugConverter {
         Alert alert = new Alert(pluginId, Alert.RISK_LOW, Alert.SUSPICIOUS, description);
         alert.setDetail(description,
                 message.getRequestHeader().getURI().toString(),
-                "1", //Param
-                "2",
-                "3", //More info
+                bug.getFile()+":"+bug.getLine(), //Param
+                "2", //Attack
+                bug.getCode(), //Other info
                 "4", //Solution
                 url,
                 message

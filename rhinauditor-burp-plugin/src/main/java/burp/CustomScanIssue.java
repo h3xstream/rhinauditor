@@ -10,14 +10,26 @@ class CustomScanIssue implements IScanIssue {
     private String name;
     private String detail;
     private String severity;
+    private String confidence;
 
-    public CustomScanIssue(IHttpService httpService, URL url, IHttpRequestResponse[] httpMessages, String name, String detail, String severity) {
+    /**
+     *
+     * @param httpService Can be extract from HttpRequestResponse
+     * @param url
+     * @param httpMessages
+     * @param name
+     * @param detail
+     * @param severity "High", "Medium", "Low", "Information" or "False positive"
+     * @param confidence "Certain", "Firm" or "Tentative"
+     */
+    public CustomScanIssue(IHttpService httpService, URL url, IHttpRequestResponse[] httpMessages, String name, String detail, String severity,String confidence) {
         this.url = url;
         this.name = name;
         this.detail = detail;
         this.severity = severity;
         this.httpService = httpService;
         this.httpMessages = httpMessages;
+        this.confidence = confidence;
     }
 
     @Override
@@ -42,7 +54,7 @@ class CustomScanIssue implements IScanIssue {
 
     @Override
     public String getConfidence() {
-        return "Certain";
+        return confidence;
     }
 
     @Override

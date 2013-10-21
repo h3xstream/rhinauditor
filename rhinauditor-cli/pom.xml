@@ -52,7 +52,6 @@
         <dependency>
             <groupId>org.mozilla</groupId>
             <artifactId>rhino</artifactId>
-            <scope>compile</scope> <!-- Provided in the context of ZAProxy -->
         </dependency>
         <dependency>
             <groupId>commons-cli</groupId>

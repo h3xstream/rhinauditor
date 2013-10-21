@@ -1,6 +1,7 @@
 package com.h3xstream.rhinauditor.zap;
 
 import com.h3xstream.rhinauditor.engine.CollectorBugReporter;
+import com.h3xstream.rhinauditor.engine.DetectorConstants;
 import com.h3xstream.rhinauditor.engine.JavaScriptScanner;
 import com.h3xstream.rhinauditor.engine.api.BugInstance;
 import com.h3xstream.rhinauditor.engine.api.Detector;
@@ -26,7 +27,7 @@ public class JavascriptScannerPlugin extends PluginPassiveScanner {
 
     private Logger logger = Logger.getLogger(JavascriptScannerPlugin.class);
 
-    private static Detector[] DETECTORS = {new InnerHtmlDetector(),new EvalDetector(),new DocumentWriteDetector()};
+    private static final Detector[] DETECTORS = DetectorConstants.DEFAULT_DETECTORS_LIST;
 
     @Override
     public void scanHttpRequestSend(HttpMessage httpMessage, int id) {
@@ -72,7 +73,7 @@ public class JavascriptScannerPlugin extends PluginPassiveScanner {
         scanner.scan(script,uri);
 
         for(BugInstance bug : reporter.getBugs()) {
-            Alert newAlert = BugConverter.convertBugToAlert(PLUGIN_ID, bug, httpMessage);
+            Alert newAlert = ZapBugConverter.convertBugToAlert(PLUGIN_ID, bug, httpMessage);
             this.parent.raiseAlert(refId, newAlert);
         }
     }
