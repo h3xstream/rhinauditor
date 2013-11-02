@@ -9,6 +9,11 @@ public class RandomDetector extends BaseDetector implements FunctionCallDetector
     private static final String RANDOM_ABBR = "RANDOM";
 
     @Override
+    public String getId() {
+        return RANDOM_ABBR;
+    }
+
+    @Override
     public void visitFunctionCall(FunctionCall functionCall) {
         String source = functionCall.getTarget().toSource();
 

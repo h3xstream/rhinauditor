@@ -12,6 +12,11 @@ public class EvalDetector extends BaseDetector implements FunctionCallDetector {
     private static final String EVAL_ABBR = "EVAL";
 
     @Override
+    public String getId() {
+        return EVAL_ABBR;
+    }
+
+    @Override
     public void visitFunctionCall(FunctionCall functionCall) {
         String source = functionCall.getTarget().toSource();
 

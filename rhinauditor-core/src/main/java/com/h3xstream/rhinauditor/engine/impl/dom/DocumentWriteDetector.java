@@ -12,6 +12,11 @@ public class DocumentWriteDetector extends BaseDetector implements FunctionCallD
     private static final String DOCUMENT_WRITE_ABBR = "DOC_WRITE";
 
     @Override
+    public String getId() {
+        return DOCUMENT_WRITE_ABBR;
+    }
+
+    @Override
     public void visitFunctionCall(FunctionCall functionCall) {
         String source = functionCall.getTarget().toSource();
 

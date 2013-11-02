@@ -7,7 +7,13 @@ import org.mozilla.javascript.ast.FunctionCall;
 public class AsyncScriptLoadDetector extends BaseDetector implements FunctionCallDetector {
 
     @Override
+    public String getId() {
+        return null;
+    }
+
+    @Override
     public void visitFunctionCall(FunctionCall functionCall) {
 
     }
+
 }

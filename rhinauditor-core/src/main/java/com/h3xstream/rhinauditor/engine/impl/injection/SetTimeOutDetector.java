@@ -12,6 +12,11 @@ public class SetTimeOutDetector extends BaseDetector implements FunctionCallDete
     private static final String SET_TIMEOUT_ABBR = "SET_TIMEOUT";
 
     @Override
+    public String getId() {
+        return SET_TIMEOUT_ABBR;
+    }
+
+    @Override
     public void visitFunctionCall(FunctionCall functionCall) {
         String source = functionCall.getTarget().toSource();
 

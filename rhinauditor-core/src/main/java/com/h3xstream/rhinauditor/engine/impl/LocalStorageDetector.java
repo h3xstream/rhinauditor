@@ -10,6 +10,12 @@ import java.util.List;
 public class LocalStorageDetector extends BaseDetector implements FunctionCallDetector {
     private static final String LOCAL_STORAGE_ABBR = "LOCAL_STORAGE";
 
+
+    @Override
+    public String getId() {
+        return LOCAL_STORAGE_ABBR;
+    }
+
     @Override
     public void visitFunctionCall(FunctionCall functionCall) {
         String source = functionCall.getTarget().toSource();

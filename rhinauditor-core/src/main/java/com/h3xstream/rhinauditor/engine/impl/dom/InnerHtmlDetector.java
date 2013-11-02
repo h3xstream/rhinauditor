@@ -12,6 +12,10 @@ public class InnerHtmlDetector extends BaseDetector implements AssignmentDetecto
 
     private static final String INNER_HTML_ABBR = "INNER_HTML";
 
+    @Override
+    public String getId() {
+        return INNER_HTML_ABBR;
+    }
 
     @Override
     public void visitAssignment(Assignment assignment) {

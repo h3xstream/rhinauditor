@@ -22,6 +22,11 @@ public class WindowLocationDetector extends BaseDetector implements AssignmentDe
     private static final String WINDOW_LOCATION_ABBR = "WINDOW_LOCATION";
 
     @Override
+    public String getId() {
+        return WINDOW_LOCATION_ABBR;
+    }
+
+    @Override
     public void visitAssignment(Assignment assignment) {
         AstNode leftNode = assignment.getLeft();
         String leftIdentifier = leftNode.toSource();
