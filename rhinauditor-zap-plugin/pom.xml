@@ -78,8 +78,9 @@
         <dependency>
             <groupId>org.zaproxy</groupId>
             <artifactId>zaproxy</artifactId>
-            <scope>system</scope>
-            <systemPath>${zap.location}\zap.jar</systemPath> <!-- ZAP doesn't release its api on maven -->
+            <version>2.2.2</version>
+            <!--<scope>system</scope>
+            <systemPath>${zap.location}\zap.jar</systemPath>--> <!-- ZAP doesn't release its api on maven -->
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
