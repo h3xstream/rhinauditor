@@ -1,9 +1,9 @@
 <zapaddon>
     <name>RhinAuditor</name>
-    <version>4</version>
+    <version>1</version>
     <description>Passive scanner highlighting sensible Javascript elements.</description>
     <author>Philippe Arteau (h3xStream)</author>
-    <url/>
+    <url>https://github.com/h3xstream/rhinauditor</url>
     <changes/>
     <dependson/>
     <extensions>
@@ -14,6 +14,6 @@
     </pscanrules>
     <filters/>
     <files/>
-    <not-before-version>2.1.0</not-before-version>
+    <not-before-version>2.2.2</not-before-version>
     <not-from-version/>
 </zapaddon>
